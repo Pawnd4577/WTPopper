@@ -34,6 +34,7 @@ public partial class OptionsWindows : Window
             Configuration.NotificationVolume = NotificationVolumeSlider.Value;
 
             MessageBox.Show("Parameters saved");
+            Close();
         }
         catch (Exception ex)
         {

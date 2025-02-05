@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
@@ -67,6 +68,18 @@ internal class UrlMonitor : IDisposable
             if (isInitialCheck || currentPostUrl != _lastPostUrl)
             {
                 _lastPostUrl = currentPostUrl;
+
+                // Check if a real image and not a video 
+                string[] validExtensions = { ".png", ".jpg", ".jpeg", ".gif" };
+                string extension = Path.GetExtension(currentPostUrl).ToLower();
+                if (!validExtensions.Contains(extension))
+                {
+                    MessageBox.Show("Format file not supported. Only PNG, JPG, JPEG and GIF are supported.",
+                        "Format invalid",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    return;
+                }
 
                 OnPostUrlChanged?.Invoke(this, currentPostUrl);
 

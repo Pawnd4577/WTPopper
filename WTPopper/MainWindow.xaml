@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WTPopper"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        Title="ImageWT"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        WindowState="Maximized"
+        ShowInTaskbar="False"
+        mc:Ignorable="d">
     <Grid>
+        <Image x:Name="WPPopperImage" Opacity="{x:Static local:Configuration.InitialOpacity}" Stretch="Uniform"/>
 
+        <tb:TaskbarIcon x:Name="NotifyIcon"
+                        ToolTipText="WPPopper">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Options" Click="Options_Click"/>
+                    <MenuItem Header="Quit" Click="Exit_Click"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@
         Topmost="True"
         WindowState="Maximized"
         ShowInTaskbar="False"
+        Visibility="Hidden"
         mc:Ignorable="d">
     <Grid>
         <Image x:Name="WPPopperImage" Opacity="{x:Static local:Configuration.InitialOpacity}" Stretch="Uniform"/>

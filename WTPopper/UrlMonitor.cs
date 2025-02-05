@@ -23,6 +23,7 @@ internal class UrlMonitor : IDisposable
     {
         _url = url;
         _httpClient = new HttpClient();
+        _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("WTPopper");
         _dispatcher = Application.Current.Dispatcher;
 
         _timer = new Timer(15000);

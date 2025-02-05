@@ -1,53 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WTPopper.Properties;
 
-namespace WTPopper
+namespace WTPopper;
+
+public static class Configuration
 {
-    public static class Configuration
+    public static double InitialOpacity
     {
-        public static double InitialOpacity
+        get => Settings.Default.InitialOpacity;
+        set
         {
-            get => Properties.Settings.Default.InitialOpacity;
-            set
-            {
-                Properties.Settings.Default.InitialOpacity = value;
-                Properties.Settings.Default.Save();
-            }
+            Settings.Default.InitialOpacity = value;
+            Settings.Default.Save();
         }
+    }
 
-        public static double FinalOpacity { get; } = 0.0;
+    public static double FinalOpacity { get; } = 0.0;
 
-        public static double DelayBeforeFade
+    public static double DelayBeforeFade
+    {
+        get => Settings.Default.DelayBeforeFade;
+        set
         {
-            get => Properties.Settings.Default.DelayBeforeFade;
-            set
-            {
-                Properties.Settings.Default.DelayBeforeFade = value;
-                Properties.Settings.Default.Save();
-            }
+            Settings.Default.DelayBeforeFade = value;
+            Settings.Default.Save();
         }
+    }
 
-        public static double FadeDuration
+    public static double FadeDuration
+    {
+        get => Settings.Default.FadeDuration;
+        set
         {
-            get => Properties.Settings.Default.FadeDuration;
-            set
-            {
-                Properties.Settings.Default.FadeDuration = value;
-                Properties.Settings.Default.Save();
-            }
+            Settings.Default.FadeDuration = value;
+            Settings.Default.Save();
         }
+    }
 
-        public static string LinkId
+    public static string LinkId
+    {
+        get => Settings.Default.LinkId;
+        set
         {
-            get => Properties.Settings.Default.LinkId;
-            set
-            {
-                Properties.Settings.Default.LinkId = value;
-                Properties.Settings.Default.Save();
-            }
+            Settings.Default.LinkId = value;
+            Settings.Default.Save();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -55,7 +56,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            PlaySound("Sounds/notif.mp3", Configuration.NotificationVolume);
+            PlaySound("notif.mp3", Configuration.NotificationVolume);
             WPPopperImage.BeginAnimation(OpacityProperty, null);
             WPPopperImage.Opacity = Configuration.InitialOpacity;
 
@@ -95,7 +96,7 @@ public partial class MainWindow : Window
     }
 
 
-    private void PlaySound(string soundPath, double volume = 100)
+    private void PlaySound(string soundName, double volume = 100)
     {
         try
         {
@@ -106,15 +107,18 @@ public partial class MainWindow : Window
 
             soundPlayer.Stop();
 
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string soundPath = Path.Combine(exePath, "Sounds", soundName);
+
             volume = volume / 100;
 
             soundPlayer.Volume = Math.Clamp(volume, 0.0, 1.0);
-            soundPlayer.Open(new Uri(soundPath, UriKind.Relative));
+            soundPlayer.Open(new Uri(soundPath, UriKind.Absolute));
             soundPlayer.Play();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erreur lors de la lecture du son : {ex.Message}");
+            MessageBox.Show($"Error while reading sound : {ex.Message}");
         }
     }
 

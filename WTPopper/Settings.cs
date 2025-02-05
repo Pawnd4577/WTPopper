@@ -37,4 +37,12 @@ public sealed class Settings : ApplicationSettingsBase
         get => (double)this["FadeDuration"];
         set => this["FadeDuration"] = value;
     }
+
+    [UserScopedSetting]
+    [DefaultSettingValue("100")]
+    public double NotificationVolume
+    {
+        get => (double)this["NotificationVolume"];
+        set => this["NotificationVolume"] = value;
+    }
 }

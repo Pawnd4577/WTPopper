@@ -45,4 +45,14 @@ public static class Configuration
             Settings.Default.Save();
         }
     }
+
+    public static double NotificationVolume
+    {
+        get => Settings.Default.NotificationVolume;
+        set
+        {
+            Settings.Default.NotificationVolume = value;
+            Settings.Default.Save();
+        }
+    }
 }

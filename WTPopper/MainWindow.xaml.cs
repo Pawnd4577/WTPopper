@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -16,6 +17,7 @@ public partial class MainWindow : Window
     private const int WS_EX_TRANSPARENT = 0x20;
     private const int WS_EX_LAYERED = 0x80000;
     private const int GWL_EXSTYLE = -20;
+    private MediaPlayer soundPlayer;
 
     private DispatcherTimer fadeTimer;
 
@@ -53,6 +55,7 @@ public partial class MainWindow : Window
     {
         try
         {
+            PlaySound("Sounds/notif.mp3", Configuration.NotificationVolume);
             WPPopperImage.BeginAnimation(OpacityProperty, null);
             WPPopperImage.Opacity = Configuration.InitialOpacity;
 
@@ -89,6 +92,30 @@ public partial class MainWindow : Window
             Hide();
         };
         WPPopperImage.BeginAnimation(OpacityProperty, fadeOutAnimation);
+    }
+
+
+    private void PlaySound(string soundPath, double volume = 100)
+    {
+        try
+        {
+            if (soundPlayer == null)
+            {
+                soundPlayer = new MediaPlayer();
+            }
+
+            soundPlayer.Stop();
+
+            volume = volume / 100;
+
+            soundPlayer.Volume = Math.Clamp(volume, 0.0, 1.0);
+            soundPlayer.Open(new Uri(soundPath, UriKind.Relative));
+            soundPlayer.Play();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Erreur lors de la lecture du son : {ex.Message}");
+        }
     }
 
     private void Window_Closing(object sender, CancelEventArgs e)

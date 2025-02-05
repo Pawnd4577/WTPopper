@@ -19,6 +19,7 @@ public partial class OptionsWindows : Window
         OpacitySlider.Value = Configuration.InitialOpacity;
         DelaySlider.Value = Configuration.DelayBeforeFade;
         FadeDurationSlider.Value = Configuration.FadeDuration;
+        NotificationVolumeSlider.Value = Configuration.NotificationVolume;
     }
 
 
@@ -30,6 +31,7 @@ public partial class OptionsWindows : Window
             Configuration.InitialOpacity = OpacitySlider.Value;
             Configuration.DelayBeforeFade = DelaySlider.Value;
             Configuration.FadeDuration = FadeDurationSlider.Value;
+            Configuration.NotificationVolume = NotificationVolumeSlider.Value;
 
             MessageBox.Show("Parameters saved");
         }

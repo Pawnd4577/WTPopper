@@ -40,12 +40,12 @@ namespace WTPopper
             }
         }
 
-        public static string ImageUrl
+        public static string LinkId
         {
-            get => Properties.Settings.Default.ImageUrl;
+            get => Properties.Settings.Default.LinkId;
             set
             {
-                Properties.Settings.Default.ImageUrl = value;
+                Properties.Settings.Default.LinkId = value;
                 Properties.Settings.Default.Save();
             }
         }

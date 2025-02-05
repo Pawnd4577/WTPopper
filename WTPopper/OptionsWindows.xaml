@@ -24,7 +24,7 @@
 
         <!-- Link ID -->
         <Label Grid.Row="0" Content="Link ID :" Margin="0,0,0,5"/>
-        <TextBox Grid.Row="1" x:Name="ImageUrlTextBox" Margin="0,0,0,20"/>
+        <TextBox Grid.Row="1" x:Name="LinkIdTextBox" Margin="0,0,0,20"/>
 
         <!-- Opacity -->
         <DockPanel Grid.Row="2" Margin="0,0,0,20">

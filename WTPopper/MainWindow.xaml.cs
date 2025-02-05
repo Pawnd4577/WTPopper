@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
@@ -33,21 +34,28 @@ namespace WTPopper
                 SetWindowLong(hwnd, GWL_EXSTYLE, new IntPtr(extendedStyle.ToInt64() | WS_EX_TRANSPARENT | WS_EX_LAYERED));
             };
 
-            LoadAndDisplayImage();
+            var monitor = new UrlMonitor("https://walltaker.joi.how/api/");
+
+            monitor.OnPostUrlChanged += (sender, postUrl) =>
+            {
+                Console.WriteLine($"New image detected: {postUrl}");
+            };
+
+            monitor.OnNewImage += (sender, image) =>
+            {
+                Console.WriteLine($"New Image downloaded: {image.Width}x{image.Height}");
+                DisplayImage(image);
+            };
+
+            monitor.Start();
+           
         }
 
-        private void LoadAndDisplayImage()
+        private void DisplayImage(ImageSource image)
         {
             try
             {
-                string imageUrl = "https://http.cat/images/102.jpg";
-
-                var bitmap = new System.Windows.Media.Imaging.BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imageUrl);
-                bitmap.EndInit();
-
-                WPPopperImage.Source = bitmap;
+                WPPopperImage.Source = image;
 
                 fadeTimer = new DispatcherTimer();
                 fadeTimer.Interval = TimeSpan.FromSeconds(15);
@@ -57,6 +65,8 @@ namespace WTPopper
                     StartFadeOut();
                 };
                 fadeTimer.Start();
+                this.Opacity = Configuration.InitialOpacity;
+                this.Show();
             }
             catch (Exception ex)
             {

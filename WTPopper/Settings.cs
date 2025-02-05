@@ -18,11 +18,11 @@ namespace WTPopper.Properties
         }
 
         [UserScopedSetting()]
-        [DefaultSettingValue("https://example.com/image.jpg")]
-        public string ImageUrl
+        [DefaultSettingValue("1234")]
+        public string LinkId
         {
-            get { return ((string)this["ImageUrl"]); }
-            set { this["ImageUrl"] = value; }
+            get { return ((string)this["LinkId"]); }
+            set { this["LinkId"] = value; }
         }
 
         [UserScopedSetting()]

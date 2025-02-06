@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using System.Windows.Media;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -15,9 +15,10 @@ public partial class MainWindow : Window
     private const int WS_EX_TRANSPARENT = 0x20;
     private const int WS_EX_LAYERED = 0x80000;
     private const int GWL_EXSTYLE = -20;
-    private MediaPlayer soundPlayer;
+    private readonly string tempSoundFile;
 
     private DispatcherTimer fadeTimer;
+    private MediaPlayer soundPlayer;
 
     public MainWindow()
     {
@@ -29,6 +30,19 @@ public partial class MainWindow : Window
             var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
             SetWindowLong(hwnd, GWL_EXSTYLE, new IntPtr(extendedStyle.ToInt64() | WS_EX_TRANSPARENT | WS_EX_LAYERED));
         };
+
+        var resourceName = $"{Assembly.GetExecutingAssembly().GetName().Name}.Sounds.notif.mp3";
+        tempSoundFile = Path.Combine(Path.GetTempPath(), $"sound_{Guid.NewGuid()}.mp3");
+
+        using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+        {
+            if (stream == null) throw new FileNotFoundException("Sound resource not found");
+
+            using (var fileStream = File.Create(tempSoundFile))
+            {
+                stream.CopyTo(fileStream);
+            }
+        }
 
         var monitor = new UrlMonitor("https://walltaker.joi.how/api/");
 
@@ -53,7 +67,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            PlaySound("notif.mp3", Configuration.NotificationVolume);
+            PlaySoundNotif(Configuration.NotificationVolume);
             WPPopperImage.BeginAnimation(OpacityProperty, null);
             WPPopperImage.Opacity = Configuration.InitialOpacity;
 
@@ -93,29 +107,21 @@ public partial class MainWindow : Window
     }
 
 
-    private void PlaySound(string soundName, double volume = 100)
+    private void PlaySoundNotif(double volume = 100)
     {
         try
         {
-            if (soundPlayer == null)
-            {
-                soundPlayer = new MediaPlayer();
-            }
-
             soundPlayer.Stop();
 
-            string exePath = AppDomain.CurrentDomain.BaseDirectory;
-            string soundPath = Path.Combine(exePath, "Sounds", soundName);
-
             volume = volume / 100;
-
             soundPlayer.Volume = Math.Clamp(volume, 0.0, 1.0);
-            soundPlayer.Open(new Uri(soundPath, UriKind.Absolute));
+
+            soundPlayer.Open(new Uri(tempSoundFile));
             soundPlayer.Play();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error while reading sound : {ex.Message}");
+            MessageBox.Show($"Error while playing sound : {ex.Message}");
         }
     }
 
@@ -133,6 +139,15 @@ public partial class MainWindow : Window
 
     private void Exit_Click(object sender, RoutedEventArgs e)
     {
+        try
+        {
+            if (File.Exists(tempSoundFile)) File.Delete(tempSoundFile);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error while cleaning up : {ex.Message}");
+        }
+
         Application.Current.Shutdown();
     }
 }

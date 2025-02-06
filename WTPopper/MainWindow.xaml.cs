@@ -109,6 +109,9 @@ public partial class MainWindow : Window
 
     private void PlaySoundNotif(double volume = 100)
     {
+
+        soundPlayer = new MediaPlayer();
+
         try
         {
             soundPlayer.Stop();

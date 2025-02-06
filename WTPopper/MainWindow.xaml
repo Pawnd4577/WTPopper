@@ -13,12 +13,15 @@
         WindowState="Maximized"
         ShowInTaskbar="False"
         Visibility="Hidden"
+        Focusable="False"
         mc:Ignorable="d">
     <Grid>
         <Image x:Name="WPPopperImage" Opacity="{x:Static local:Configuration.InitialOpacity}" Stretch="Uniform"/>
 
         <tb:TaskbarIcon x:Name="NotifyIcon"
-                        ToolTipText="WPPopper">
+                        ToolTipText="WPPopper"
+                        IconSource="/logo.ico"
+                        >
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Options" Click="Options_Click"/>

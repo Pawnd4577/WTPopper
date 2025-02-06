@@ -41,10 +41,10 @@
         <!-- Fade delay -->
         <DockPanel Grid.Row="3" Margin="0,0,0,20">
             <TextBlock Text="Delay before fade : " VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding ElementName=DelaySlider, Path=Value, StringFormat={}{0:F1} secondes}" 
+            <TextBlock Text="{Binding ElementName=DelaySlider, Path=Value, StringFormat={}{0:F1} seconds}" 
                        VerticalAlignment="Center" Margin="5,0"/>
             <Slider x:Name="DelaySlider" 
-                    Minimum="1" Maximum="30" 
+                    Minimum="1" Maximum="60" 
                     TickFrequency="1"
                     IsSnapToTickEnabled="True"
                     TickPlacement="BottomRight"/>
@@ -53,7 +53,7 @@
         <!-- Fade duration -->
         <DockPanel Grid.Row="4" Margin="0,0,0,20">
             <TextBlock Text="Fade duration : " VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding ElementName=FadeDurationSlider, Path=Value, StringFormat={}{0:F1} secondes}" 
+            <TextBlock Text="{Binding ElementName=FadeDurationSlider, Path=Value, StringFormat={}{0:F1} seconds}" 
                        VerticalAlignment="Center" Margin="5,0"/>
             <Slider x:Name="FadeDurationSlider" 
                     Minimum="0.5" Maximum="10" 

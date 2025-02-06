@@ -117,7 +117,7 @@ internal class UrlMonitor : IDisposable
         }
         catch (Exception ex)
         {
-            await _dispatcher.InvokeAsync(() => { Console.WriteLine($"Erreur image: {ex.Message}"); });
+            await _dispatcher.InvokeAsync(() => { Console.WriteLine($"Error image: {ex.Message}"); });
         }
     }
 

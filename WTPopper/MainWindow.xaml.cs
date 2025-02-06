@@ -10,9 +10,6 @@ using System.Windows.Threading;
 
 namespace WTPopper;
 
-/// <summary>
-///     Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
     private const int WS_EX_TRANSPARENT = 0x20;
@@ -64,7 +61,7 @@ public partial class MainWindow : Window
             Show();
 
             fadeTimer = new DispatcherTimer();
-            fadeTimer.Interval = TimeSpan.FromSeconds(15);
+            fadeTimer.Interval = TimeSpan.FromSeconds(Configuration.DelayBeforeFade);
             fadeTimer.Tick += (s, e) =>
             {
                 fadeTimer.Stop();

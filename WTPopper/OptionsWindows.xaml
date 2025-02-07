@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Options" 
         Height="400" 
-        Width="500"
+        Width="600"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
 
     <Grid Margin="20">
@@ -35,7 +36,10 @@
                     Minimum="0" Maximum="1" 
                     TickFrequency="0.1"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"/>
+                    TickPlacement="BottomRight"
+                    Width="300"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"/>
         </DockPanel>
 
         <!-- Fade delay -->
@@ -47,7 +51,10 @@
                     Minimum="1" Maximum="60" 
                     TickFrequency="1"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"/>
+                    TickPlacement="BottomRight"
+                    Width="300"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"/>
         </DockPanel>
 
         <!-- Fade duration -->
@@ -56,10 +63,13 @@
             <TextBlock Text="{Binding ElementName=FadeDurationSlider, Path=Value, StringFormat={}{0:F1} seconds}" 
                        VerticalAlignment="Center" Margin="5,0"/>
             <Slider x:Name="FadeDurationSlider" 
-                    Minimum="0.5" Maximum="10" 
-                    TickFrequency="0.5"
+                    Minimum="0.5" Maximum="60" 
+                    TickFrequency="1"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"/>
+                    TickPlacement="BottomRight"
+                    Width="300"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"/>
         </DockPanel>
 
         <DockPanel Grid.Row="5" Margin="0,0,0,20">
@@ -70,7 +80,10 @@
                     Minimum="0" Maximum="100"
                     TickFrequency="5"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"/>
+                    TickPlacement="BottomRight"
+                    Width="300"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"/>
         </DockPanel>
 
         <!-- Buttons -->

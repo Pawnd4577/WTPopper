@@ -20,6 +20,12 @@ public partial class MainWindow : Window
     private DispatcherTimer fadeTimer;
     private MediaPlayer soundPlayer;
 
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern IntPtr GetWindowLong(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
     public MainWindow()
     {
         InitializeComponent();
@@ -31,7 +37,7 @@ public partial class MainWindow : Window
             SetWindowLong(hwnd, GWL_EXSTYLE, new IntPtr(extendedStyle.ToInt64() | WS_EX_TRANSPARENT | WS_EX_LAYERED));
         };
 
-        var resourceName = $"{Assembly.GetExecutingAssembly().GetName().Name}.Sounds.notif.mp3";
+        var resourceName = $"{Assembly.GetExecutingAssembly().GetName().Name}.Resources.Sounds.notif.mp3";
         tempSoundFile = Path.Combine(Path.GetTempPath(), $"sound_{Guid.NewGuid()}.mp3");
 
         using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
@@ -56,12 +62,6 @@ public partial class MainWindow : Window
 
         monitor.Start();
     }
-
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern IntPtr GetWindowLong(IntPtr hWnd, int nIndex);
-
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
 
     private void DisplayImage(ImageSource image)
     {

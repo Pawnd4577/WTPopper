@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace WTPopper;
 
@@ -20,6 +21,8 @@ public partial class OptionsWindows : Window
         DelaySlider.Value = Configuration.DelayBeforeFade;
         FadeDurationSlider.Value = Configuration.FadeDuration;
         NotificationVolumeSlider.Value = Configuration.NotificationVolume;
+        RepopCheckbox.IsEnabled = Configuration.RepopActive;
+        RepopSlider.Value = Configuration.RepopTimer;
     }
 
 
@@ -32,6 +35,8 @@ public partial class OptionsWindows : Window
             Configuration.DelayBeforeFade = DelaySlider.Value;
             Configuration.FadeDuration = FadeDurationSlider.Value;
             Configuration.NotificationVolume = NotificationVolumeSlider.Value;
+            Configuration.RepopActive = RepopCheckbox.IsEnabled;
+            Configuration.RepopTimer = RepopSlider.Value;
 
             MessageBox.Show("Parameters saved");
             Close();
@@ -40,6 +45,13 @@ public partial class OptionsWindows : Window
         {
             MessageBox.Show($"Error while saving parameters : {ex.Message}");
         }
+    }
+
+    private void TextBox_repop_click(object sender, RoutedEventArgs e)
+    {
+        RepopCheckbox.IsChecked = !RepopCheckbox.IsChecked;
+        
+        e.Handled = true;
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)

@@ -45,4 +45,20 @@ public sealed class Settings : ApplicationSettingsBase
         get => (double)this["NotificationVolume"];
         set => this["NotificationVolume"] = value;
     }
+
+    [UserScopedSetting]
+    [DefaultSettingValue("false")]
+    public bool RepopActive
+    {
+        get => (bool)this["RepopActive"];
+        set => this["RepopActive"] = value;
+    }
+
+    [UserScopedSetting]
+    [DefaultSettingValue("300")]
+    public double RepopTimer
+    {
+        get => (double)this["RepopTimer"];
+        set => this["RepopTimer"] = value;
+    }
 }

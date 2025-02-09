@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WTPopper"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
-        <BitmapImage x:Key="AppIcon" UriSource="/logo.ico"/>
+        <BitmapImage x:Key="AppIcon" UriSource="/Resources/logo.ico"/>
     </Application.Resources>
 
 </Application>

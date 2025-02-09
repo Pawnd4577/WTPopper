@@ -10,19 +10,23 @@
 	<PublishSingleFile>true</PublishSingleFile>
     <SelfContained>false</SelfContained>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Sounds\notif.mp3" />
+    <None Remove="Resources\Sounds\notif.mp3" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="logo.ico" />
+    <Content Include="Resources\logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Sounds\notif.mp3">
+    <EmbeddedResource Include="Resources\logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sounds\notif.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -40,7 +44,7 @@
   </ItemGroup>
 
 <ItemGroup>
-    <Resource Include="logo.ico">
+    <Resource Include="Resources\logo.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

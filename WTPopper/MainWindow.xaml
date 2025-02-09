@@ -20,7 +20,7 @@
 
         <tb:TaskbarIcon x:Name="NotifyIcon"
                         ToolTipText="WPPopper"
-                        IconSource="/logo.ico"
+                        IconSource="/Resources/logo.ico"
                         >
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>

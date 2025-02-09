@@ -19,71 +19,97 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Link ID -->
-        <Label Grid.Row="0" Content="Link ID :" Margin="0,0,0,5"/>
+        <Label Grid.Row="0" Content="Link ID:" Margin="0,0,0,5"/>
         <TextBox Grid.Row="1" x:Name="LinkIdTextBox" Margin="0,0,0,20"/>
 
         <!-- Opacity -->
         <DockPanel Grid.Row="2" Margin="0,0,0,20">
-            <TextBlock Text="Opacity : " VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding ElementName=OpacitySlider, Path=Value, StringFormat={}{0:F2}}" 
+            <TextBlock Text="Opacity: " VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding ElementName=OpacitySlider, Path=Value, StringFormat={}{0}}" 
                        VerticalAlignment="Center" Margin="5,0"/>
             <Slider x:Name="OpacitySlider" 
                     Minimum="0" Maximum="1" 
                     TickFrequency="0.1"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"
+                    TickPlacement="None"
                     Width="300"
                     Margin="0,0,20,0"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
         </DockPanel>
 
         <!-- Fade delay -->
         <DockPanel Grid.Row="3" Margin="0,0,0,20">
-            <TextBlock Text="Delay before fade : " VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding ElementName=DelaySlider, Path=Value, StringFormat={}{0:F1} seconds}" 
+            <TextBlock Text="Delay before fade: " VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding ElementName=DelaySlider, Path=Value, StringFormat={}{0} seconds}" 
                        VerticalAlignment="Center" Margin="5,0"/>
             <Slider x:Name="DelaySlider" 
                     Minimum="1" Maximum="60" 
                     TickFrequency="1"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"
+                    TickPlacement="None"
                     Width="300"
                     Margin="0,0,20,0"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
         </DockPanel>
 
         <!-- Fade duration -->
         <DockPanel Grid.Row="4" Margin="0,0,0,20">
-            <TextBlock Text="Fade duration : " VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding ElementName=FadeDurationSlider, Path=Value, StringFormat={}{0:F1} seconds}" 
+            <TextBlock Text="Fade duration: " VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding ElementName=FadeDurationSlider, Path=Value, StringFormat={}{0} seconds}" 
                        VerticalAlignment="Center" Margin="5,0"/>
             <Slider x:Name="FadeDurationSlider" 
                     Minimum="1" Maximum="60" 
                     TickFrequency="1"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"
+                    TickPlacement="None"
                     Width="300"
                     Margin="0,0,20,0"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
         </DockPanel>
 
+        <!-- Notification volume -->
         <DockPanel Grid.Row="5" Margin="0,0,0,20">
-            <TextBlock Text="Notification Volume : " VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding ElementName=NotificationVolumeSlider, Path=Value, StringFormat={}{0:F1}}" 
+            <TextBlock Text="Notification Volume: " VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding ElementName=NotificationVolumeSlider, Path=Value, StringFormat={}{0}}" 
                        VerticalAlignment="Center" Margin="5,0"/>
             <Slider x:Name="NotificationVolumeSlider" 
                     Minimum="0" Maximum="100"
                     TickFrequency="5"
                     IsSnapToTickEnabled="True"
-                    TickPlacement="BottomRight"
+                    TickPlacement="None"
                     Width="300"
                     Margin="0,0,20,0"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
+        </DockPanel>
+
+        <!-- Popup repop -->
+        <DockPanel Grid.Row="6" Margin="0,0,0,20">
+            <CheckBox Content="CheckBox" Width="15" VerticalAlignment="Center" Name="RepopCheckbox" />
+            <TextBlock Text="Secondes before repop: " VerticalAlignment="Center" Margin="5,0,0,0" PreviewMouseDown="TextBox_repop_click"/>
+            <TextBlock Text="{Binding ElementName=RepopSlider, Path=Value, StringFormat={}{0} seconds}" 
+                       VerticalAlignment="Center" Margin="5,0"/>
+
+            <Slider x:Name="RepopSlider" 
+                    Minimum="5" Maximum="900" 
+                    TickFrequency="5"
+                    IsSnapToTickEnabled="True"
+                    TickPlacement="None"
+                    Width="300"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    IsEnabled="{Binding IsChecked, ElementName=RepopCheckbox}"
+                    VerticalAlignment="Center"/>
+            
         </DockPanel>
 
         <!-- Buttons -->
@@ -91,5 +117,6 @@
             <Button Content="Apply" Click="ApplyButton_Click" Width="100" Height="30" Margin="0,0,10,0"/>
             <Button Content="Close" Click="CloseButton_Click" Width="100" Height="30"/>
         </StackPanel>
+
     </Grid>
 </Window>

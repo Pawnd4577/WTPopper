@@ -55,4 +55,24 @@ public static class Configuration
             Settings.Default.Save();
         }
     }
+
+    public static bool RepopActive
+    {
+        get => Settings.Default.RepopActive;
+        set
+        {
+            Settings.Default.RepopActive = value;
+            Settings.Default.Save();
+        }
+    }
+
+    public static double RepopTimer
+    {
+        get => Settings.Default.RepopTimer;
+        set
+        {
+            Settings.Default.RepopTimer = value;
+            Settings.Default.Save();
+        }
+    }
 }
